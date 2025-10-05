@@ -10,6 +10,6 @@ this repsitory is for Malene Kavanagh to test their skills in
 as these are key pillars in Liatrio's work culture
 
 ----------
-
+these are the 
 [Resources](https://docs.google.com/document/d/1g_dNU0ZJ6XnPpI3Cw8L0ZPx5wCyaTPyqINaOSh-riaM/edit?tab=t.0)
-
+that I have used to accomplish the tasks
