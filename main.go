@@ -45,6 +45,7 @@ func main() {
 		//c.SendString(intro)
 		//return c.JSON(fine)
 		return c.JSON(intro)
+		//^accidentally made json.Marshal useless
 	})
 
 	app.Listen(":3000")
