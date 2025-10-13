@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -20,8 +19,7 @@ type Intro struct {
 func main() {
 	app := fiber.New()
 	app.Get("/", func(c *fiber.Ctx) error {
-		//current time
-		//t := time.Now()
+		//Unix allows it to be computer time instead of human readable
 		t := time.Now().UTC().Unix()
 
 		intro := Intro{
@@ -33,15 +31,14 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(string(fine))
+		// TEST print
+		//fmt.Println(string(fine))
 		// to show what json.Marshal is sending
 		c.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
-		//c.SendString(intro)
-		//return c.JSON(fine)
+		//Sends the encoded json to the browser
 		return c.Send(fine)
-		//^  this gives garbled output
-		//^accidentally made json.Marshal useless
 	})
-
+	//FIX: Needs to be sent to the cloud browser
+	//     Docker needs to be implemented with server
 	app.Listen(":3000")
 }
