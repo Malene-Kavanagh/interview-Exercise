@@ -64,14 +64,14 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
           #workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: replace with your workload identity provider
       #added
-      - name: 'Docker Auth'
-        run: |-
-          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
-      - name: 'Build and Push Container'
-        run: |-
-          DOCKER_TAG="$${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
-          docker build --tag "${DOCKER_TAG}" .
-          docker push "${DOCKER_TAG}"
+#      - name: 'Docker Auth'
+#        run: |-
+#          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
+#      - name: 'Build and Push Container'
+#        run: |-
+#          DOCKER_TAG="$${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
+#          docker build --tag "${DOCKER_TAG}" .
+#          docker push "${DOCKER_TAG}"
       #end of added
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@33553064113a37d688aa6937bacbdc481580be17' # google-github-actions/deploy-cloudrun@v2
