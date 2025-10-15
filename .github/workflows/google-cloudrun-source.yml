@@ -37,7 +37,8 @@ on:
 env:
   PROJECT_ID: 'myinterviewexercise' # TODO: update to your Google Cloud project ID
   REGION: 'us-west1' # TODO: update to your region
-  SERVICE: 'interview-exercise-00001-9fd' # TODO: update to your service name
+  SERVICE: 'github-work-service'
+  #SERVICE: 'interview-exercise-00001-9fd' # TODO: update to your service name
   #GAR_NAME: 'cloud-run-source-deploy' # Artifact registry
   
 
