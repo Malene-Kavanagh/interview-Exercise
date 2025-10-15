@@ -68,9 +68,6 @@ jobs:
           #credentials_json: ${{ secrets.GCP_CREDENTIALS }}
           workload_identity_provider: 'projects/853724396539/locations/global/workloadIdentityPools/myinterviewexercisew/providers/github' # TODO: replace with your workload identity provider
           service_account: 'github-work-service@myinterviewexercise.iam.gserviceaccount.com'
-      - name: 'Docker Auth'
-        run: |-
-          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
       - name: 'Build and Push Container'
         run: |-
           DOCKER_TAG="$${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
