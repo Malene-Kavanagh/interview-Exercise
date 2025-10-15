@@ -65,8 +65,9 @@ jobs:
         #uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2' # google-github-actions/auth@v2
         with:
           project_id: ${{ env.PROJECT_ID }}
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-          #workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: replace with your workload identity provider
+          #credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          workload_identity_provider: 'https://iam.googleapis.com/projects/853724396539/locations/global/workloadIdentityPools/myinterviewexercisew/providers/github' # TODO: replace with your workload identity provider
+          service_account: 'github-work-service@myinterviewexercise.iam.gserviceaccount.com'
       #added
 #      - name: 'Docker Auth'
 #        run: |-
