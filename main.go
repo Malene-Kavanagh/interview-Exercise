@@ -43,6 +43,6 @@ func main() {
 		//^accidentally made json.Marshal useless
 	})
 
-	app.Listen(":3000")
+	app.Listen(":80")
 	//app.Listen(":8080") // for cloud run
 }
