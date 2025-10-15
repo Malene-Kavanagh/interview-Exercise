@@ -33,7 +33,9 @@ on:
   push:
     branches:
       - 'main'
-
+permissions:
+    contents: 'read'
+    id-token: 'write'
 env:
   PROJECT_ID: 'myinterviewexercise' # TODO: update to your Google Cloud project ID
   REGION: 'us-west1' # TODO: update to your region
@@ -47,9 +49,6 @@ jobs:
     runs-on: 'ubuntu-latest'
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     
-    permissions:
-      contents: 'read'
-      #id-token: 'write'
 
     steps:
       - name: 'Checkout'
