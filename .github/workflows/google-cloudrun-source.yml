@@ -27,7 +27,7 @@ jobs:
         
       - name: setting the variables
         run: >-
-          echo "${{ env.IMAGE-TAG }}=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.IMAGE }}" >> $GITHUB_ENV
+          echo "$IMAGE-TAG=$REGION-docker.pkg.dev/$Project/$REPO/$IMAGE" >> $GITHUB_ENV
           
       - name: Authenticating to Google Cloud
         uses: google-github-actions/auth@v2
