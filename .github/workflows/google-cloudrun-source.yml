@@ -52,6 +52,7 @@ jobs:
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_TAG }}
           source: .
           
       - name: Show output URL
