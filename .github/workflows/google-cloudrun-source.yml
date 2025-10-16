@@ -34,7 +34,7 @@ jobs:
         with:
           credentials_json: '${{ secrets.GC_KEY_SERVICE }}'
 
-      - name: Setting up gcloud
+      - name: Setting up gcloud 
         uses: google-github-actions/setup-gcloud@v2
       #- name: Setting up the Cloud SDK
       #  uses: google-github-actions/deploy-cloudrun@v2
