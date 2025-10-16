@@ -33,7 +33,6 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: '${{ secrets.GC_KEY_SERVICE }}'
-          image: docker.io/malenekavanagh/main:latest
           
       - name: Setting up the Cloud SDK
         uses: google-github-actions/deploy-cloudrun@v2
@@ -43,11 +42,18 @@ jobs:
         
       - name: Build and Push
         uses: docker/build-push-action@v5
-        
         with:
           context: .
           push: true
           tags: '${{ env.IMAGE_TAG }}'
           
-      - name: Show output
+      - name: Deploy to Cloud run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: ${{ env_IMAGE_TAG }}
+          
+      - name: Show output URL
         run: 'echo ${{ steps.deploy.outputs.url }}'
