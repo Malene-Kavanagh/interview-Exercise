@@ -40,12 +40,19 @@ jobs:
       - name: Docker authentication!
         run: 'gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet'
         
-      - name: Build and Push
-        uses: docker/build-push-action@v5
+      #- name: Build and Push
+      #  uses: docker/build-push-action@v5
+      #  with:
+      #    context: .
+      #    push: true
+      #    tags: '${{ env.IMAGE_TAG }}'
+      - name: Deploy to Cloud Run from Source
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
-          context: .
-          push: true
-          tags: '${{ env.IMAGE_TAG }}'
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          source: .
           
       - name: Show output URL
         run: 'echo ${{ steps.deploy.outputs.url }}'
