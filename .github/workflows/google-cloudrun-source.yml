@@ -47,13 +47,5 @@ jobs:
           push: true
           tags: '${{ env.IMAGE_TAG }}'
           
-      - name: Deploy to Cloud run
-        id: deploy
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
-          image: ${{ env_IMAGE_TAG }}
-          
       - name: Show output URL
         run: 'echo ${{ steps.deploy.outputs.url }}'
