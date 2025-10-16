@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net"
 	"os"
 	"strings"
@@ -52,8 +53,8 @@ func main() {
 		}
 		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
 	})
-	_ = app.Listen(":" + port)
-	//log.Fatal(app.Listen(":" + port))
+	//_ = app.Listen(":" + port)
+	log.Fatal(app.Listen(":" + port))
 	//port is hardcoded to be 80
 	//log.Fatal(app.Listen(":80"))
 	//app.Listen(":80")
