@@ -37,7 +37,9 @@ jobs:
       - name: Setting up the Cloud SDK
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-           image: gcr.io/malenekavanagh/main:latest
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: gcr.io/malenekavanagh/main:latest
         
       - name: Docker authentication!
         run: 'gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet'
