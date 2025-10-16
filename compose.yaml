@@ -14,6 +14,12 @@ services:
       target: final
     ports:
       - 80:80
+      - 8080:8080 # for cloud run 
+#    restart: always
+#    environment:
+#      - PORT=8080 # for cloud run
+#      - PORT=80
+#      - OTHER_ENV_VAR=some-value
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
