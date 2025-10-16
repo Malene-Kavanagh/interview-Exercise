@@ -33,15 +33,17 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: '${{ secrets.GC_KEY_SERVICE }}'
-          
-      - name: Setting up the Cloud SDK
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
-          image: gcr.io/malenekavanagh/main:latest
+
+      - name: Setting up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+      #- name: Setting up the Cloud SDK
+      #  uses: google-github-actions/deploy-cloudrun@v2
+      #  with:
+      #    service: ${{ env.SERVICE }}
+      #    region: ${{ env.REGION }}
+      #    image: gcr.io/malenekavanagh/main:latest
         
-      - name: Docker authentication!
+      - name: Docker authentication
         run: 'gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet'
         
       #- name: Build and Push
