@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"strings"
@@ -61,10 +60,10 @@ func main() {
 		}
 		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
 	})
-	log.Fatal(app.Listen(":" + port))
+	//log.Fatal(app.Listen(":" + port))
 	//port is hardcoded to be 80
 	//log.Fatal(app.Listen(":80"))
-	//app.Listen(":80")
+	app.Listen(":80")
 }
 
 func extractPort(hostport string) string {
