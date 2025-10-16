@@ -15,20 +15,16 @@ type Intro struct {
 	Time    int64  `json:"timestamp"`
 }
 
-// func Convert(t time.Time) string {
-//     return t.UTC().Format(time.RFC3339)
-// }
-
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "80" // default port 80 if not specified
 	}
-	//app := fiber.New()  // default config
-	app := fiber.New(fiber.Config{})
+
+	app := fiber.New()
+
 	app.Get("/", func(c *fiber.Ctx) error {
-		//current time
-		//t := time.Now()
+		//current time in unix timestamp
 		t := time.Now().UTC().Unix()
 
 		intro := Intro{
@@ -40,15 +36,11 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
-		// to show what json.Marshal is sending
+		//set content type to application/json
 		c.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
-		//c.SendString(intro)
-		//return c.JSON(fine)
+		//return c.JSON(intro)
 		return c.SendString(string(fine)) //error check
 		//return c.Send(fine)
-		//^  this gives garbled output
-		//^accidentally made json.Marshal useless
 	})
 
 	app.Get("/port", func(c *fiber.Ctx) error {
@@ -60,10 +52,11 @@ func main() {
 		}
 		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
 	})
+	_ = app.Listen(":" + port)
 	//log.Fatal(app.Listen(":" + port))
 	//port is hardcoded to be 80
 	//log.Fatal(app.Listen(":80"))
-	app.Listen(":80")
+	//app.Listen(":80")
 }
 
 func extractPort(hostport string) string {
