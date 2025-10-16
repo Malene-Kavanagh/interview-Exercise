@@ -32,7 +32,7 @@ jobs:
       - name: Authenticating to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          image: gcr.io/malenekavanagh/main:latest
+          --image: gcr.io/malenekavanagh/main:latest
           credentials_json: '${{ secrets.GC_KEY_SERVICE }}'
           
       - name: Setting up the Cloud SDK
