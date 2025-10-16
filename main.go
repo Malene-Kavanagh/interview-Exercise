@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net"
 	"os"
 	"strings"
@@ -41,12 +40,13 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(string(fine))
+
 		// to show what json.Marshal is sending
 		c.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
 		//c.SendString(intro)
 		//return c.JSON(fine)
-		return c.Send(fine)
+		return c.SendString(string(fine)) //error check
+		//return c.Send(fine)
 		//^  this gives garbled output
 		//^accidentally made json.Marshal useless
 	})
