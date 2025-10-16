@@ -88,9 +88,9 @@ WORKDIR /app
 USER nonroot:nonroot
 
 # Expose the port that the application listens on.
-EXPOSE 80
-#ENV PORT=8080
-#EXPOSE 8080 
+#EXPOSE 80
+ENV PORT=8080
+EXPOSE 8080 
 
 # for cloud run
 COPY --from=build /app/server /app/server

@@ -3,8 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
-	//"log"
+	"log"
 	"net"
 	"os"
 	"strings"
@@ -25,7 +24,7 @@ type Intro struct {
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "80"
+		port = "8080"
 	}
 	//app := fiber.New()  // default config
 	app := fiber.New(fiber.Config{})
@@ -62,10 +61,10 @@ func main() {
 		}
 		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
 	})
-	//log.Fatal(app.Listen(":" + port))
+	log.Fatal(app.Listen(":" + port))
 	//port is hardcoded to be 80
 	//log.Fatal(app.Listen(":80"))
-	app.Listen(":80")
+	//app.Listen(":80")
 }
 
 func extractPort(hostport string) string {
