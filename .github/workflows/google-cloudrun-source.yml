@@ -16,6 +16,12 @@ env:
   REPO: repo-main
   IMAGE: main
   GCS_KEY: '${{ secrets.GC_KEY_SERVICE }}'
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: run tests
+#      uses: liatrio/github-actions/apprentice-action@master
   
 jobs:
   build-push:
@@ -54,7 +60,10 @@ jobs:
           tags: |
             ${{ env.IMAGE_TAG }}
             ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.IMAGE }}:latest
-          
+      
+      - name: run tests
+        uses: liatrio/github-actions/apprentice-action@master    
+      
       - name: Deploy to Cloud Run from Source
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
