@@ -9,10 +9,12 @@
 **/.dockerignore
 **/.env
 **/.git
+**/.github
 **/.gitignore
 **/.project
 **/.settings
 **/.toolstarget
+**/*.tmp
 **/.vs
 **/.vscode
 **/*.*proj.user
@@ -23,6 +25,7 @@
 **/docker-compose*
 **/compose.y*ml
 **/Dockerfile*
+**/*.log
 **/node_modules
 **/npm-debug.log
 **/obj

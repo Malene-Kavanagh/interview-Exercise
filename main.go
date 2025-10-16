@@ -24,7 +24,7 @@ type Intro struct {
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "80"
+		port = "8080"
 	}
 	//app := fiber.New()  // default config
 	app := fiber.New(fiber.Config{})

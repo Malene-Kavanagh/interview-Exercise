@@ -10,28 +10,38 @@
 # Create a stage for building the application.
 ARG GO_VERSION=1.25.1
 FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS build
-WORKDIR /src
+WORKDIR /app
+#WORKDIR /src
+#cahe go dep
+COPY go.mod go.sum ./
+RUN go mod download 
+#   go mod download -x
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /go/pkg/mod/ to speed up subsequent builds.
 # Leverage bind mounts to go.sum and go.mod to avoid having to copy them into
 # the container.
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,source=go.sum,target=go.sum \
-    --mount=type=bind,source=go.mod,target=go.mod \
-    go mod download -x
+#RUN --mount=type=cache,target=/go/pkg/mod/ \
+#    --mount=type=bind,source=go.sum,target=go.sum \
+#    --mount=type=bind,source=go.mod,target=go.mod \
+#    go mod download -x
+
+COPY . .
+ENV CGO_ENABLED=0 GOOS=linux
+RUN go build -o server .
 
 # This is the architecture you're building for, which is passed in by the builder.
 # Placing it here allows the previous steps to be cached across architectures.
-ARG TARGETARCH
+#ARG TARGETARCH
 
 # Build the application.
 # Leverage a cache mount to /go/pkg/mod/ to speed up subsequent builds.
 # Leverage a bind mount to the current directory to avoid having to copy the
 # source code into the container.
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,target=. \
-    CGO_ENABLED=0 GOARCH=$TARGETARCH go build -o /bin/server .
+#RUN --mount=type=cache,target=/go/pkg/mod/ \
+#    --mount=type=bind,target=. \
+#    CGO_ENABLED=0 GOARCH=$TARGETARCH go build -o /bin/server .
+
 
 ################################################################################
 # Create a new stage for running the application that contains the minimal
@@ -44,37 +54,45 @@ RUN --mount=type=cache,target=/go/pkg/mod/ \
 # most recent version of that image when you build your Dockerfile. If
 # reproducibility is important, consider using a versioned tag
 # (e.g., alpine:3.17.2) or SHA (e.g., alpine@sha256:c41ab5c992deb4fe7e5da09f67a8804a46bd0592bfdf0b1847dde0e0889d2bff).
-FROM alpine:latest AS final
+#FROM alpine:latest AS final
+
+FROM gcr.io/distroless/base-debian12
+WORKDIR /app
 
 # Install any runtime dependencies that are needed to run your application.
 # Leverage a cache mount to /var/cache/apk/ to speed up subsequent builds.
-RUN --mount=type=cache,target=/var/cache/apk \
-    apk --update add \
-        ca-certificates \
-        tzdata \
-        && \
-        update-ca-certificates
+#RUN --mount=type=cache,target=/var/cache/apk \
+#    apk --update add \
+#        ca-certificates \
+#        tzdata \
+#        && \
+#        update-ca-certificates
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
-USER appuser
+#ARG UID=10001
+#RUN adduser \
+#    --disabled-password \
+#    --gecos "" \
+#    --home "/nonexistent" \
+#    --shell "/sbin/nologin" \
+#    --no-create-home \
+#    --uid "${UID}" \
+#    appuser
+#USER appuser
 
 # Copy the executable from the "build" stage.
-COPY --from=build /bin/server /bin/
+#COPY --from=build /bin/server /bin/
+
+USER nonroot:nonroot
 
 # Expose the port that the application listens on.
 EXPOSE 80
-EXPOSE 8080  
-# for cloud run
+ENV PORT=8080
+EXPOSE 8080 
 
+# for cloud run
+COPY --from=build /app/server /app/server
 # What the container should run when it is started.
-ENTRYPOINT [ "/bin/server" ]
+#ENTRYPOINT [ "/bin/server" ]
+CMD [ "/app/server" ]
