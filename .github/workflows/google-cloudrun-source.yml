@@ -76,6 +76,13 @@ jobs:
   liatrio-tests:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+
+      - name: setting the variables
+        run: >-
+          echo "$IMAGE-TAG=$REGION-docker.pkg.dev/$Project/$REPO/$IMAGE" >> $GITHUB_ENV
+        
       - name: Docker authentication
         run: 'gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet'
         
