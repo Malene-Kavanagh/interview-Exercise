@@ -9,14 +9,17 @@
 # https://github.com/docker/awesome-compose
 version: '3.8'
 services:
+  app:
+    image: malenekavanagh/main:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   server:
     build:
       context: .
       target: final
     ports:
       - 80:80
-    extra_hosts:
-      - "host.docker.internal:host-gateway" 
+     
 #    restart: always
 #    environment:
 #      - PORT=8080 # for cloud run
