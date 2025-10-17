@@ -14,7 +14,7 @@ env:
   REGION: us-west1
   SERVICE: github-work-service
   REPO: repo-main
-  IMAGE: main
+  IMAGE: malenekavanagh/main
   GCS_KEY: '${{ secrets.GC_KEY_SERVICE }}'
 #jobs:
 #  build:
@@ -25,13 +25,15 @@ env:
   
 jobs:
   build-push:
-    #runs-on: ubuntu-latest
-    runs-on: docker-latest
+    runs-on: ubuntu-latest
     steps:
-    
       - name: Checkout the repo
         uses: actions/checkout@v4
         
+     # - name: Build images
+      #  run: docker build -t malenekavanagh/main:latest .
+    
+          
       - name: setting the variables
         run: >-
           echo "$IMAGE-TAG=$REGION-docker.pkg.dev/$Project/$REPO/$IMAGE" >> $GITHUB_ENV
