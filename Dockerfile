@@ -58,7 +58,7 @@ RUN go build -o server .
 #FROM alpine:latest AS final
 
 FROM gcr.io/distroless/base-debian12
-WORKDIR /app
+WORKDIR /main
 
 # Install any runtime dependencies that are needed to run your application.
 # Leverage a cache mount to /var/cache/apk/ to speed up subsequent builds.
@@ -86,14 +86,15 @@ WORKDIR /app
 #COPY --from=build /bin/server /bin/
 
 USER nonroot:nonroot
-
+COPY --from=build /app/server /app/server
 # Expose the port that the application listens on.
-#EXPOSE 80
-ENV PORT=8080
-EXPOSE 8080 
+EXPOSE 80
+#ENV PORT=8080
+#EXPOSE 8080 
 
 # for cloud run
-COPY --from=build /app/server /app/server
+
 # What the container should run when it is started.
 #ENTRYPOINT [ "/bin/server" ]
+
 CMD [ "/app/server" ]

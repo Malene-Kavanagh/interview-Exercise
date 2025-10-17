@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"log"
 	"net"
@@ -37,10 +38,19 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+		var minibuf bytes.Buffer
+
+		err2 := json.Compact(&minibuf, fine)
+		if err2 != nil {
+			panic(err2)
+		}
 		//set content type to application/json
 		c.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
 		//return c.JSON(intro)
-		return c.SendString(string(fine)) //error check
+		return c.Send(minibuf.Bytes())
+		//alternatives:
+		//return c.SendString(minibuf.String())
+		//return c.SendString(string(fine)) //error check
 		//return c.Send(fine)
 	})
 

@@ -9,13 +9,13 @@
 # https://github.com/docker/awesome-compose
 version: '3.8'
 services:
-  app:
-    image: malenekavanagh/main:latest
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-      - "host.docker.internal:172.17.0.1"
-    networks:
-      - my_external_network
+  #app:
+    #image: malenekavanagh/main:latest
+    #extra_hosts:
+      #- "host.docker.internal:host-gateway"
+      #- "host.docker.internal:172.17.0.0"
+    #networks:
+    #  - my_external_network
   server:
     build:
       context: .
