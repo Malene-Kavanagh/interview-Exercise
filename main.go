@@ -25,17 +25,6 @@ func main() {
 
 	app := fiber.New()
 	//changed location to see if time changes
-	app.Get("/port", func(c *fiber.Ctx) error {
-		if p := c.Get("Forwarded-Port"); p != "" {
-			return c.SendString(p)
-		}
-		if p := extractPort(c.Get("Forwarded-Host")); p != "" {
-			return c.SendString(p)
-		}
-		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
-	})
-	log.Fatal(app.Listen(":" + port))
-	//end of port handler
 	app.Get("/", func(c *fiber.Ctx) error {
 		//current time in unix timestamp
 		t := time.Now().UTC().Unix()
@@ -65,16 +54,16 @@ func main() {
 		//return c.Send(fine)
 	})
 
-	// app.Get("/port", func(c *fiber.Ctx) error {
-	// 	if p := c.Get("Forwarded-Port"); p != "" {
-	// 		return c.SendString(p)
-	// 	}
-	// 	if p := extractPort(c.Get("Forwarded-Host")); p != "" {
-	// 		return c.SendString(p)
-	// 	}
-	// 	return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
-	// })
-	// log.Fatal(app.Listen(":" + port))
+	app.Get("/port", func(c *fiber.Ctx) error {
+		if p := c.Get("Forwarded-Port"); p != "" {
+			return c.SendString(p)
+		}
+		if p := extractPort(c.Get("Forwarded-Host")); p != "" {
+			return c.SendString(p)
+		}
+		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
+	})
+	log.Fatal(app.Listen(":" + port))
 	//_ = app.Listen(":" + port)
 	//port is hardcoded to be 80
 	//log.Fatal(app.Listen(":80"))
