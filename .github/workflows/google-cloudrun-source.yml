@@ -25,7 +25,8 @@ env:
   
 jobs:
   build-push:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: docker-latest
     steps:
     
       - name: Checkout the repo
