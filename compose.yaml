@@ -13,6 +13,9 @@ services:
     image: malenekavanagh/main:latest
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - my_external_network
   server:
     build:
       context: .
@@ -25,8 +28,8 @@ services:
 #      - PORT=8080 # for cloud run
 #      - PORT=80
 #      - OTHER_ENV_VAR=some-value
-  my_service:
-    image: malenekavanagh/main:latest
+    depends_on:
+      - app
     networks:
       - my_external_network
 
