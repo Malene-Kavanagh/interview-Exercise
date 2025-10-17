@@ -54,19 +54,19 @@ func main() {
 		//return c.Send(fine)
 	})
 
-	app.Get("/port", func(c *fiber.Ctx) error {
-		if p := c.Get("Forwarded-Port"); p != "" {
-			return c.SendString(p)
-		}
-		if p := extractPort(c.Get("Forwarded-Host")); p != "" {
-			return c.SendString(p)
-		}
-		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
-	})
+	//app.Get("/port", func(c *fiber.Ctx) error {
+	//	if p := c.Get("Forwarded-Port"); p != "" {
+	//		return c.SendString(p)
+	//	}
+	//	if p := extractPort(c.Get("Forwarded-Host")); p != "" {
+	//		return c.SendString(p)
+	//	}
+	//	return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
+	//})
 	//_ = app.Listen(":" + port)
-	log.Fatal(app.Listen(":" + port))
+	//log.Fatal(app.Listen(":" + port))
 	//port is hardcoded to be 80
-	//log.Fatal(app.Listen(":80"))
+	log.Fatal(app.Listen(":80"))
 	//app.Listen(":80")
 }
 
