@@ -55,14 +55,19 @@ jobs:
       - name: Docker authentication
         run: 'gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet'
         
-      - name: Build and Push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ env.IMAGE_TAG }}
-            ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.IMAGE }}:latest
+      #- name: Build and Push
+      #  uses: docker/build-push-action@v5
+      #  with:
+      #    context: .
+      #    push: true
+      #    tags: |
+      #      ${{ env.IMAGE_TAG }}
+      #      ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.IMAGE }}:latest
+      - name: build image
+        run: docker build -t malenekavanagh/main:latest -t malenekavanagh/main:${{ github.sha }} .
+
+      - name: running on port 80
+        run: docker run -d --name svc -p 80:80 malenekavanagh/main:${{ github.sha }} 
       
       - name: run tests
         uses: liatrio/github-actions/apprentice-action@master    
