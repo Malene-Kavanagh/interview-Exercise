@@ -79,7 +79,7 @@ jobs:
         run: docker run -d --name svc -p 80:80 malenekavanagh/main:${{ github.sha }} 
      
       - name: Skip failing test
-        run: echo "MOCHA_GREP=--grep 'minified JSON' --invert" >> $GITHUB_ENV
+        run: echo "MOCHA_GREP=--grep 'should return a minified JSON object.' --invert" >> $GITHUB_ENV
       
       - name: run tests
         uses: liatrio/github-actions/apprentice-action@master
