@@ -16,12 +16,6 @@ env:
   REPO: repo-main
   IMAGE: malenekavanagh/main
   GCS_KEY: '${{ secrets.GC_KEY_SERVICE }}'
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: run tests
-#      uses: liatrio/github-actions/apprentice-action@master
   
 jobs:
   build-push:
@@ -41,12 +35,6 @@ jobs:
 
       - name: Setting up gcloud 
         uses: google-github-actions/setup-gcloud@v2
-      #- name: Setting up the Cloud SDK
-      #  uses: google-github-actions/deploy-cloudrun@v2
-      #  with:
-      #    service: ${{ env.SERVICE }}
-      #    region: ${{ env.REGION }}
-      #    image: gcr.io/malenekavanagh/main:latest
         
       - name: Docker authentication
         run: 'gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet'
@@ -59,8 +47,7 @@ jobs:
           tags: |
             ${{ env.IMAGE_TAG }}
             ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.IMAGE }}:latest
-          
-      
+               
       - name: Deploy to Cloud Run from Source
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
@@ -70,8 +57,7 @@ jobs:
           source: .
           
       - name: Show output URL
-        run: 'echo ${{ steps.deploy.outputs.url }}'
-        
+        run: 'echo ${{ steps.deploy.outputs.url }}'      
 
   liatrio-tests:
     runs-on: ubuntu-latest
