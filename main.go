@@ -28,17 +28,10 @@ func main() {
 	//changed location to see if time changes
 	app.Get("/", func(c *fiber.Ctx) error {
 		//current time in unix timestamp
-		//var sec int64 = int64(time.Second)
 		p := time.Now().UTC() //this actuallyy doesn't make sense on how it works
 		t := p.UnixMilli()
 		//works with go but not in docker??
 
-		//t := time.Now().UTC().UnixNano() / 1e6
-		//t := time.Now().UnixNano() / 1e6
-		//umt := time.Date(2025,time.October,time.UTC())
-		//t := time.UnixMilli(umt.UnixMilli()).UTC()
-		// unixSec()*1e3 + int64(t.nsec())/1e6
-		//fmt.Println("Current Time (UTC):", p)
 		intro := Intro{
 			Message: "My name is Malene Kavanagh",
 			Time:    t,
@@ -59,10 +52,6 @@ func main() {
 		c.Set(fiber.HeaderContentType, fiber.MIMEApplicationJSON)
 		//return c.JSON(intro)
 		return c.Send(minibuf.Bytes())
-		//alternatives:
-		//return c.SendString(minibuf.String())
-		//return c.SendString(string(fine)) //error check
-		//return c.Send(fine)
 	})
 
 	app.Get("/port", func(c *fiber.Ctx) error {
@@ -75,9 +64,6 @@ func main() {
 		return c.SendString(extractPort(string(c.Context().Request.Header.Peek("Host"))))
 	})
 	log.Fatal(app.Listen(":" + port))
-	//_ = app.Listen(":" + port)
-	//log.Fatal(app.Listen(":80"))
-	//app.Listen(":80")
 }
 
 func extractPort(hostport string) string {
