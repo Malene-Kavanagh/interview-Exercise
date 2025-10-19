@@ -26,11 +26,14 @@ as these are key pillars in Liatrio's work culture
 - [x] Use Docker Containerization
   _Write a Dockerfile that will build your application that is hosted in repository_
 
+
 **GitHub Actions:**
   - [x] Builds your application’s Docker image
   - [ ] Verifies the application functionality using Liatrio’s GitHub apprentice-action
   - [x]  Pushes your image to an OCI compliant repository
   - [x] Uniquely version your image each successful workflow run
+
+
 - [x] Cloud Deployment
    _this is deployed to google cloud_
 
