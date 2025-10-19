@@ -82,4 +82,4 @@ jobs:
         run: echo "MOCHA_GREP=--grep 'should return a minified JSON object.' --invert" >> $GITHUB_ENV
       
       - name: run tests
-        uses: liatrio/github-actions/apprentice-action@master
+        uses: liatrio/github-actions/apprentice-action@0b41561cca6822cc8d880fe0e49e7807a41fdf91
