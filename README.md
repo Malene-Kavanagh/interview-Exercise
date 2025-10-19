@@ -17,13 +17,13 @@ as these are key pillars in Liatrio's work culture
 
 ----------
 
-- [x] Create a GitHub Repository
+- [x] Create a GitHub Repository  
   _this needs to be public_
 
-- [x] Create a Golang Application
+- [x] Create a Golang Application  
    _use fiber to build a simple single endpoint web application taht returns a JSON minified object_
 
-- [x] Use Docker Containerization
+- [x] Use Docker Containerization  
   _Write a Dockerfile that will build your application that is hosted in repository_
 
 
@@ -31,11 +31,11 @@ as these are key pillars in Liatrio's work culture
   - [x] Builds your application’s Docker image
   - [ ] Verifies the application functionality using Liatrio’s GitHub apprentice-action
   - [x]  Pushes your image to an OCI compliant repository
-  - [x] Uniquely version your image each successful workflow run
+  - [x] Uniquely version your image each successful workflow run  
 
 
-- [x] Cloud Deployment
+- [x] Cloud Deployment  
    _this is deployed to google cloud_
 
-- [x] Deployment Workflow
+- [x] Deployment Workflow  
   _deploy on push_
