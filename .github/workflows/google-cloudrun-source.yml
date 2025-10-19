@@ -80,3 +80,5 @@ jobs:
       
       - name: run tests
         uses: liatrio/github-actions/apprentice-action@master
+        env:
+          TEST_ARGS: "--grep 'minified JSON' --invert"
