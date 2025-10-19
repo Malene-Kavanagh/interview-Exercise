@@ -13,8 +13,9 @@ import (
 )
 
 type Intro struct {
-	Message string `json:"message"`
-	Time    int64  `json:"timestamp"`
+	Message string    `json:"message"`
+	Time    int64     `json:"timestamp"`
+	time2   time.Time `json:"-"` /// ??????? this part just disapears
 }
 
 func main() {
@@ -27,11 +28,21 @@ func main() {
 	//changed location to see if time changes
 	app.Get("/", func(c *fiber.Ctx) error {
 		//current time in unix timestamp
-		t := time.Now().UTC().Unix()
+		//var sec int64 = int64(time.Second)
+		p := time.Now().UTC() //this actuallyy doesn't make sense on how it works
+		t := p.UnixMilli()
+		//works with go but not in docker??
 
+		//t := time.Now().UTC().UnixNano() / 1e6
+		//t := time.Now().UnixNano() / 1e6
+		//umt := time.Date(2025,time.October,time.UTC())
+		//t := time.UnixMilli(umt.UnixMilli()).UTC()
+		// unixSec()*1e3 + int64(t.nsec())/1e6
+		//fmt.Println("Current Time (UTC):", p)
 		intro := Intro{
 			Message: "My name is Malene Kavanagh",
 			Time:    t,
+			time2:   p, //this doesn't make sense
 		}
 
 		fine, err := json.Marshal(intro)
@@ -65,7 +76,6 @@ func main() {
 	})
 	log.Fatal(app.Listen(":" + port))
 	//_ = app.Listen(":" + port)
-	//port is hardcoded to be 80
 	//log.Fatal(app.Listen(":80"))
 	//app.Listen(":80")
 }
