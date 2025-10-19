@@ -8,13 +8,15 @@ services:
       - "host.docker.internal:172.17.0.0"
     networks:
       - my_external_network
+    #network dependency
   server:
     build:
       context: .
       target: final
     ports:
       - 80:80
-     
+    #port mapping
+   #dependency on app service  
     depends_on:
       - app
     networks:
@@ -24,3 +26,4 @@ networks:
   my_external_network:
     name: bridge
     external: true
+    #to get network access it uses the external bridge network

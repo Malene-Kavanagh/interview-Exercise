@@ -13,10 +13,10 @@ import (
 )
 
 type Intro struct {
-	Message string    `json:"message"`
-	Time    int64     `json:"timestamp"`
-	time2   time.Time `json:"-"` /// ??????? this part just disapears
-}
+	Message string `json:"message"`
+	Time    int64  `json:"timestamp"`
+	//time2   time.Time `json:"-"` /// ??????? this part just disapears
+} //it works
 
 func main() {
 	port := os.Getenv("PORT")
@@ -30,12 +30,12 @@ func main() {
 		//current time in unix timestamp
 		p := time.Now().UTC() //this actuallyy doesn't make sense on how it works
 		t := p.UnixMilli()
-		//works with go but not in docker??
+		//works fine
 
 		intro := Intro{
 			Message: "My name is Malene Kavanagh",
 			Time:    t,
-			time2:   p, //this doesn't make sense
+			//time2:   p, //this doesn't make sense
 		}
 
 		fine, err := json.Marshal(intro)
