@@ -28,7 +28,7 @@ func main() {
 	//changed location to see if time changes
 	app.Get("/", func(c *fiber.Ctx) error {
 		//current time in unix timestamp
-		p := time.Now().UTC() //this actuallyy doesn't make sense on how it works
+		p := time.Now().UTC()
 		t := p.UnixMilli()
 		//works fine
 
