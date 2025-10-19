@@ -33,7 +33,7 @@ as these are key pillars in Liatrio's work culture
    _this is deployed to google cloud_
 
 - [x] Deployment Workflow  
-  _deploy on push_\
+  _deploy on push_
 
 **GitHub Actions:**
   - [x] Builds your application’s Docker image
