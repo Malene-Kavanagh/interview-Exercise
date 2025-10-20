@@ -37,6 +37,6 @@ as these are key pillars in Liatrio's work culture
 
 **GitHub Actions:**
   - [x] Builds your application’s Docker image
-  - [ ] Verifies the application functionality using Liatrio’s GitHub apprentice-action
+  - [x] Verifies the application functionality using Liatrio’s GitHub apprentice-action
   - [x]  Pushes your image to an OCI compliant repository
   - [x] Uniquely version your image each successful workflow run
