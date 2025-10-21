@@ -14,7 +14,7 @@ env:
   REGION: us-west1
   SERVICE: github-work-service
   REPO: repo-main
-  IMAGE: malenekavanagh/main ${{ github.sha }}
+  IMAGE: malenekavanagh/main
   GCS_KEY: '${{ secrets.GC_KEY_SERVICE }}'
   
 jobs:
