@@ -4,7 +4,6 @@
 
 FROM golang:1.25.1 AS build
 WORKDIR /main
-#WORKDIR /app
 #cahe go dep
 COPY go.mod go.sum ./
 RUN go mod download 
