@@ -24,7 +24,7 @@ as these are key pillars in Liatrio's work culture
   _this needs to be public_
 
 - [x] Create a Golang Application  
-   _use fiber to build a simple single endpoint web application taht returns a JSON minified object_
+   _use fiber to build a simple single endpoint web application that returns a JSON minified object_
 
 - [x] Use Docker Containerization  
   _Write a Dockerfile that will build your application that is hosted in repository_
