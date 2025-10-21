@@ -15,7 +15,6 @@ import (
 type Intro struct {
 	Message string `json:"message"`
 	Time    int64  `json:"timestamp"`
-	//time2   time.Time `json:"-"` /// ??????? this part just disapears
 } //it works
 
 func main() {
@@ -25,7 +24,6 @@ func main() {
 	}
 
 	app := fiber.New()
-	//changed location to see if time changes
 	app.Get("/", func(c *fiber.Ctx) error {
 		//current time in unix timestamp
 		p := time.Now().UTC()
@@ -35,7 +33,6 @@ func main() {
 		intro := Intro{
 			Message: "My name is Malene Kavanagh",
 			Time:    t,
-			//time2:   p, //this doesn't make sense
 		}
 
 		fine, err := json.Marshal(intro)
