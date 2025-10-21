@@ -15,8 +15,9 @@ import (
 type Intro struct {
 	Message string `json:"message"`
 	Time    int64  `json:"timestamp"`
-} //it works
-// demo4
+}
+
+// Demonstration
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
